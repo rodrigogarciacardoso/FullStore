@@ -1,11 +1,16 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using FullStore.Application.Applications;
+using FullStore.Application.Interfaces;
+using FullStore.Domain.Interfaces;
+using FullStore.Infra.Data.Contexto;
+using FullStore.Infra.Data.Repositories;
+using FullStore.Infra.Data.UoW;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using FullStore.Infra.CrossCutting.IoC;
 
 namespace FullStore.MVC
 {
@@ -21,8 +26,16 @@ namespace FullStore.MVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<FullStoreContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            // Application
+            services.AddScoped<IUsuarioApplication, UsuarioApplication>();
+
+            // Infra - Data
+            services.AddScoped<FullStoreContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -58,12 +71,6 @@ namespace FullStore.MVC
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-        }
-
-        private static void RegisterServices(IServiceCollection services)
-        {
-            // Adding dependencies from another layers (isolated from Presentation)
-            NativeInjectorBootStrapper.RegisterServices(services);
         }
     }
 }

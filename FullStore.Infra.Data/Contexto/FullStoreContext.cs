@@ -19,7 +19,7 @@ namespace FullStore.Infra.Data.Contexto
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new ClienteMap());
+            modelBuilder.ApplyConfiguration(new UsuarioMap());
         }
 
         public override int SaveChanges()

@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Clientes";
+}
+
+<div class="container">
+    <div class="header clearfix">
+        <h3 class="text-muted">Clientes</h3>
+    </div>
+    <div id="grid">
+        <a class="btn btn-success btn-incluir col-xs-offset-12" role="button"><i class="glyphicon glyphicon-plus"></i></a>
+        <table id="tabela" class="table table-hover">
+            <thead>
+                <tr>
+                    <th id="_id" class="hidden">#</th>
+                    <th class="col-lg-3">CPF</th>
+                    <th class="col-lg-3">Nome</th>
+                    <th class="col-lg-3">Telefone</th>
+                    <th class="col-lg-3">Data Nascimento</th>
+                </tr>
+            </thead>
+            <tbody class="gridVenda"></tbody>
+        </table>
+    </div>
+</div>
+
+@section Styles{
+    <link href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet" />
+}
+
+@section Scripts{
+    <script src="~/js/usuario-controller.js"></script>
+    <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/lib/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+}

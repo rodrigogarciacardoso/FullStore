@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FullStore.Infra.Data.Mappings
 {
-    public class ClienteMap : IEntityTypeConfiguration<Usuario>
+    public class UsuarioMap : IEntityTypeConfiguration<Usuario>
     {
         public void Configure(EntityTypeBuilder<Usuario> builder)
         {
